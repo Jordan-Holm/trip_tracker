@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-//import Users from './components/users/Users';
+import Users from './components/users/Users';
 import Home from './components/shared/Home';
 import About from './components/shared/About';
 import NoMatch from './components/shared/NoMatch';
@@ -14,10 +14,8 @@ const App = () => (
     <Routes>
       <Route path='/' element={<Home />} />
       <Route path='/about' element={<About />} />
- {/* <Route path='/users' element={<Users />} /> */}
-      {/* :subId is a placeholde for the parent id */}
-      {/* <Route path='/:userId/trips' element={<Trips />} /> */}
-      {/* mainly for all other routes go here */}
+      <Route path='/users' element={<Users />} />
+      <Route path='/:userId/trips' element={<Trips />} />
       <Route path='/*' element={<NoMatch />} />
     </Routes>
     {/* <Footer /> */}

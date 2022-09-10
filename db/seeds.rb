@@ -17,14 +17,17 @@ User.delete_all
 # Sub.create(title: 'Tech')
 
 5.times do
-  @user = User.create(
-    # faker helps out with giving fake data
-    title: Faker::TvShows::Friends.character
-  )
+    @user = User.create(
+        name = Faker::TvShows::Friends.character
+        # faker helps out with giving fake data
+        username: name,
+        email: "#{name}@#{Faker::Company.name}.com",
+        password: Faker::String.random(length: 6)
 
-  3.times do
-    Trip.create(
-      title: Faker::TvShows::Friends.quote,
-      body: Faker::TvShows::Friends.location,
-      user_id: @user.id
-    )
+    3.times do
+        Trip.create(
+            title: Faker::TvShows::Friends.quote,
+            body: Faker::TvShows::Friends.location,
+            user_id: @user.id)
+    end
+end
