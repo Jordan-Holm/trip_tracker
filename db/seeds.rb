@@ -28,5 +28,3 @@ User.delete_all
       body: Faker::TvShows::Friends.location,
       user_id: @user.id
     )
-  end
-end
