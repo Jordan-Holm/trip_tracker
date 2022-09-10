@@ -41,5 +41,4 @@ class Api::LocationsController < ApplicationController
             @trip = Trip.find(params[:trip_id])
         end
     end
-
 end
