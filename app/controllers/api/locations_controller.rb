@@ -1,15 +1,17 @@
 class Api::LocationsController < ApplicationController
+    before_action :set_parent
+    
     def index
-        render json: Location.all
+        render json: @trip.location.all
       end
 
       def show
-        @location = Location.find(params[:id])
+        @location = @trip.location.find(params[:id])
         render json: @location
       end
 
       def create
-        @location = Location.new(location_params)
+        @location = @trip.location.new(location_params)
         if @location.save
           render json: @location
         else
@@ -18,7 +20,7 @@ class Api::LocationsController < ApplicationController
       end
 
       def update
-        @location = Location.find(params[:id])
+        @location = @trip.location.find(params[:id])
         if @location.update(location_params)
           render json: @location
         else
@@ -27,26 +29,17 @@ class Api::LocationsController < ApplicationController
       end
 
       def destroy
-        @location = Location.find(params[:id])
+        @location = @trip.location.find(params[:id])
         @location.destroy
         render json: { message: 'model_name deleted' }
 
       private
         def location_params
         params.require(:location).permit(:name, whereabouts)
-  end
 
-    
-
-
-
-
-
-
-
-
-
-
-
-
+        def set_parent
+            @trip = Trip.find(params[:trip_id])
+        end
     end
+
+end
