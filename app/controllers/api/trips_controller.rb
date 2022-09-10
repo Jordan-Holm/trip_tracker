@@ -1,8 +1,9 @@
 class Api::TripController < ApplicationController
-  before_action :set_trip, only: [:show, :update, :destroy]
+  before_action :set_parent
+
   
   def index
-    render json: Trip.all
+    render json: @user.trip.all
   end
 
   def show
@@ -11,7 +12,7 @@ class Api::TripController < ApplicationController
   end
 
   def create 
-    @trip = Trip.new(trip_params)
+    @trip = @user.trip.new(trip_params)
     if @trip.save
       render json: @trip
     else 
@@ -29,11 +30,11 @@ class Api::TripController < ApplicationController
   end
 
   def destroy
-    @trip = Trip_name.find(params[:id])
+    @trip = @user.trip.find(params[:id])
     @trip_name.destroy
     render json: { message: 'Trip deleted' }
     or
-    Trip.find(params[:id]).destroy
+    @user.trip.find(params[:id]).destroy
     render json: { message: 'Trip deleted' }
   end
 
@@ -42,10 +43,8 @@ class Api::TripController < ApplicationController
       params.require(:trip).permit(:name, :days)
     end
     def set_parent
-      @User = User.find(params[:parent_id])
+      @user = User.find(params[:user_id])
     end
 
-    def set_trip
-      @trip = Trip.find(params[:id])
-    end
+    
   end
